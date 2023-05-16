@@ -88,9 +88,4 @@ Phase 4
 
 npm start
 
-#### How to use your library (where applicable)
 
-#### UML
-
-![Lab 31 - UML](./assets/lab31-uml.PNG)
-![Lab 32 - UML](./assets/lab32-uml.PNG)
