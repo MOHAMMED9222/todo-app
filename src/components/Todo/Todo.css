@@ -1,0 +1,43 @@
+
+.form-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.form-h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.todo-item, .assignee, .difficulty, .submit-button {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.todo-item span, .assignee span, .difficulty span {
+  margin-bottom: 5px;
+}
+
+.todo-item input, .assignee input, .difficulty input {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px #ccc;
+  font-size: 14px;
+}
+
+.submit-button button {
+  padding: 5px;
+  border: none;
+  width: 50%;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px #ccc;
+  font-size: 14px;
+  background-color: #1C7ED6;
+  color: #fff;
+  cursor: pointer;
+}

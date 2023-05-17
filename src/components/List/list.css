@@ -1,0 +1,53 @@
+.list-card {
+  width: 100%;
+  display: inline-block;
+  margin-right: 10px;
+  max-height: 140px;
+  margin-bottom: 10px;
+  border: solid 1px lightgray
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  max-height: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.pending{
+  background-color: #51CF66;
+  font-weight: bold;;
+  color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.list-assignee {
+  margin-left: 10px;
+ 
+}
+
+.list-close-button {
+  padding: 0;
+  font-size: 18px;
+  color: #666;
+  margin-left: auto;
+}
+
+.list-body {
+  flex: 1;
+  padding: 10px;
+}
+
+.list-item-text {
+  margin: 0;
+}
+
+
+.list-difficulty {
+  margin-top: 5px;
+  text-align: right;
+}
