@@ -1,9 +1,7 @@
-import './footer.css';
+const Footer = () => (
 
-function Footer() {
+  <footer className="footer">&;copy Mohammed Abubakr 2023</footer>
 
-    return <footer className="footer">&copy; 2023</footer>;
-  }
-
+);
 
 export default Footer;
