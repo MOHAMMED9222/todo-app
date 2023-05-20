@@ -1,43 +1,31 @@
-
-import { createStyles, Header, Navbar } from '@mantine/core';
-import { Link, useNavigate } from 'react-router-dom';
+import { createStyles, Header, Navbar, Group } from '@mantine/core';
+import { Link } from 'react-router-dom'
+import Login from '../Login';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
-    backgroundColor: theme.colors.gray[8],
+    backgroundColor: theme.colors.blue[7],
     color: theme.colors.gray[0],
-    width: '100%',
     height: '100%',
-    margin: 'auto',
-    fontSize: theme.fontSizes.lg,
+    fontSize: theme.fontSizes.md,
     padding: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-    marginTop: theme.spacing.md,
 
   },
-  h1: {
-    color: theme.colors.white,
-    width: '80%',
-    margin: 'auto',
-    fontSize: theme.fontSizes.lg,
-    padding: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-    marginTop: theme.spacing.md,
-  }
+}));
 
-}))
-
-const AppHeader = ({ incomplete }) => {
+const HeaderComponent = () => {
   const { classes } = useStyles();
-
   return (
-    <Header data-testid="todo-header">
+    <Header>
       <Navbar className={classes.navbar}>
-      
+        <Group spacing="xs">
+          <Link default className={classes.link} to="/">Todo</Link>
+          <Link className={classes.link} to="/settings">Settings</Link>
+        <Login />
+        </Group>
       </Navbar>
-      <h1  data-testid="todo-h1">To Do List: {incomplete} item/s pending</h1>
     </Header>
   )
-}
+};
 
-export default AppHeader
+export default HeaderComponent;

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
 import { createStyles, Grid } from '@mantine/core';
 import { v4 as uuid } from 'uuid';
-import { SettingsContext } from '../../Context/Settings';
 import List from '../List';
-import './todo.css'
+import './todo.css';
+import Auth from '../Auth';
 
 const useStyles = createStyles((theme) => ({
   h1: {
@@ -65,35 +65,37 @@ const Todo = () => {
   return (
     <>
       <h1 data-testid="todo-h1" className={classes.h1}>To Do List: {incomplete} items pending</h1>
-      <Grid style={{width: '80%', margin: 'auto'}}>
+      <Grid style={{ width: '80%', margin: 'auto' }}>
         <Grid.Col xs={12} sm={4}>
-          <form onSubmit={handleSubmit} className="form-container">
+          <Auth capability="create">
+            <form onSubmit={handleSubmit} className="form-container">
 
-            <h2 className="form-h2">Add To Do Item</h2>
+              <h2 className="form-h2">Add To Do Item</h2>
 
-            <label className="todo-item">
-              <span>To Do Item</span>
-              <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-            </label>
+              <label className="todo-item">
+                <span>To Do Item</span>
+                <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+              </label>
 
-            <label className="assignee">
-              <span>Assigned To</span>
-              <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-            </label>
+              <label className="assignee">
+                <span>Assigned To</span>
+                <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+              </label>
 
-            <label className="difficulty">
-              <span>Difficulty</span>
-              <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-            </label>
+              <label className="difficulty">
+                <span>Difficulty</span>
+                <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
+              </label>
 
-            <label className="submit-button">
-              <button type="submit">Add Item</button>
-            </label>
-          </form>
+              <label className="submit-button">
+                <button type="submit">Add Item</button>
+              </label>
+            </form>
+          </Auth>
         </Grid.Col>
 
         <Grid.Col xs={12} sm={8}>
-          <List list={list} toggleComplete={toggleComplete} />
+          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
         </Grid.Col>
 
       </Grid>

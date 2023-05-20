@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { createStyles, Grid, Switch, NumberInput } from '@mantine/core';
 import { SettingsContext } from '../../Context/Settings';
 import './settings.css'
+import { IconSettings } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   h1: {
@@ -35,7 +36,7 @@ const Settings = () => {
 
   return (
     <>
-      <h1 className={classes.h1}>Manage Settings</h1>
+      <h1 className={classes.h1}><IconSettings />Manage Settings</h1>
       <Grid style={{ width: '80%', margin: 'auto' }}>
         <Grid.Col xs={12} sm={4}>
           <form className="form-container" onSubmit={handleSubmit}>
