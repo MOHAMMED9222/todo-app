@@ -1,16 +1,19 @@
 import React from 'react';
-import Footer from './components/footer';
-import Header from './components/Header';
-import Todo from './components/Todo';
+import ReactDOM from 'react-dom/client';
+import { MantineProvider } from '@mantine/core';
+import App from './App';
+import SettingsProvider from './Context/Settings';
+import LoginProvider from './Context/Auth';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <Todo />
-        <Footer />
-      </>
-    );
-  }
-}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <LoginProvider>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <SettingsProvider>
+          <App />
+        </SettingsProvider>
+      </MantineProvider>
+    </LoginProvider>
+  </React.StrictMode>
+);

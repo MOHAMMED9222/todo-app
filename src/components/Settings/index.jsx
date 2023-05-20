@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createStyles, Grid, Switch, NumberInput } from '@mantine/core';
 import { SettingsContext } from '../../Context/Settings';
 import './settings.css'
+import { IconSettings } from '@tabler/icons-react';
+import { When } from 'react-if';
 
 const useStyles = createStyles((theme) => ({
   h1: {
@@ -17,6 +19,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Settings = () => {
+  const [show, setShow] = useState(false);
   const { classes } = useStyles();
   const {
     displayCount,
@@ -30,12 +33,13 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShow(true);
     saveSettings();
   };
 
   return (
     <>
-      <h1 className={classes.h1}>Manage Settings</h1>
+      <h1 className={classes.h1}><IconSettings />Manage Settings</h1>
       <Grid style={{ width: '80%', margin: 'auto' }}>
         <Grid.Col xs={12} sm={4}>
           <form className="form-container" onSubmit={handleSubmit}>
@@ -73,12 +77,14 @@ const Settings = () => {
         </Grid.Col>
 
         <Grid.Col xs={12} sm={8}>
+          <When condition={show}>
           <div className="updated-settings">
             <h2 className="form-h2">Updated Settings</h2>
             <p>{showComplete ? 'Show Completed ToDos' : 'Hide Completed ToDos'}</p>
             <p>{`Items Per Page: ${displayCount}`}</p>
             <p>{`Sort Keyword: ${sort}`}</p>
           </div>
+          </When>
         </Grid.Col>
 
       </Grid>
