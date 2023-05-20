@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
 import { createStyles, Grid } from '@mantine/core';
-import { v4 as uuid } from 'uuid';
 import List from '../List';
 import './todo.css';
 import Auth from '../Auth';
+import axios from 'axios';
+
 
 const useStyles = createStyles((theme) => ({
   h1: {
@@ -29,27 +30,52 @@ const Todo = () => {
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
-    item.id = uuid();
-    item.complete = false;
-    console.log(item);
-    setList([...list, item]);
+    try {
+      axios({
+        url: 'https://api-js401.herokuapp.com/api/v1/todo', 
+        method: 'post', 
+        data: item
+      });
+      item.complete = false;
+      console.log(item);
+      setList([...list, item]);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function deleteItem(id) {
-    const items = list.filter(item => item.id !== id);
-    setList(items);
+    try {
+      axios.delete(`https://api-js401.herokuapp.com/api/v1/todo/${id}`);
+      const items = list.filter(item => item._id !== id);
+      setList(items);      
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function toggleComplete(id) {
+    try {
+      const item = list.filter(i => i._id === id)[0] || {};
+      if (item._id) {
+        const url = `https://api-js401.herokuapp.com/api/v1/todo/${id}`;
+        const method = 'put';
+        const data = { complete: !item.complete };
+        axios({ url, method, data });
+        const items = list.map(item => {
+          if (item._id === id) {
+            item.complete = !item.complete;
+          }
+          return item;
+        });
 
-    const items = list.map(item => {
-      if (item.id === id) {
-        item.complete = !item.complete;
+        setList(items);
       }
-      return item;
-    });
+    } catch (e) {
+      console.error(e);
+    }
 
-    setList(items);
 
   }
 
@@ -61,6 +87,14 @@ const Todo = () => {
     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [list]);
+
+  useEffect(() => {
+    const getData = async () => {
+      let response = await axios.get('https://api-js401.herokuapp.com/api/v1/todo');
+      setList(response.data.results);
+    };
+    getData();
+  }, [])
 
   return (
     <>
@@ -95,7 +129,7 @@ const Todo = () => {
         </Grid.Col>
 
         <Grid.Col xs={12} sm={8}>
-          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
+          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem} />
         </Grid.Col>
 
       </Grid>

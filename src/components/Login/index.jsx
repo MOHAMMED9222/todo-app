@@ -20,23 +20,25 @@ function Login() {
   return (
     <>
       <When condition={loggedIn}>
-        <button onClick={logout}>Log Out</button>
+        <button style={{ backgroundColor: 'red', marginRight: '10px', color: 'white', borderRadius: '5px', padding: '10px 20px' }} onClick={logout}>Log Out</button>
       </When>
 
       <When condition={!loggedIn}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', marginRight: '10px' }}>
           <input
-            placeholder="UserName"
+            placeholder="Username"
             name="username"
             onChange={handleChange}
+            style={{ marginRight: '10px', borderRadius: '5px' }}
           />
           <input
-            placeholder="password"
+            placeholder="Password"
             name="password"
             type="password"
             onChange={handleChange}
+            style={{ marginRight: '10px', borderRadius: '5px' }}
           />
-          <button>Login</button>
+          <button style={{ backgroundColor: '#343A40', color: 'white', borderRadius: '5px', padding: '10px 20px' }}>Login</button>
         </form>
       </When>
     </>
